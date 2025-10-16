@@ -1,0 +1,65 @@
+version: '3.8'
+services:
+  backend:
+    build: ./backend
+    container_name: covid_backend
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+    networks:
+      - covidnet
+  frontend:
+    image: php:8.1-apache
+    container_name: covid_frontend
+    volumes:
+      - ./frontend:/var/www/html
+      - ./assets/images:/var/www/html/assets/images
+    ports:
+      - "8081:80"
+    environment:
+      - API_URL=http://backend:5000/api/countries
+      - API_URL_COUNTRY=http://backend:5000/api/country/
+    depends_on:
+      - backend
+    networks:
+      - covidnet
+  db:
+    image: postgres:14
+    container_name: covid_db
+    environment:
+      POSTGRES_DB: covidtracker
+      POSTGRES_USER: coviduser
+      POSTGRES_PASSWORD: covidpass
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - covidnet
+  prometheus:
+    image: prom/prometheus
+    container_name: covid_prometheus
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9091:9090"
+    depends_on:
+      - backend
+    networks:
+      - covidnet
+  grafana:
+    image: grafana/grafana
+    container_name: covid_grafana
+    ports:
+      - "3001:3000"
+    depends_on:
+      - prometheus
+    networks:
+      - covidnet
+    volumes:
+      - grafana_data:/var/lib/grafana
+networks:
+  covidnet:
+    driver: bridge
+volumes:
+  db_data:
+  grafana_data:

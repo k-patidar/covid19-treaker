@@ -1,0 +1,22 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "COVID Tracker Stats",
+    "panels": [
+      {
+        "type": "graph",
+        "title": "API Requests",
+        "targets": [{"expr": "covid_api_requests_total", "format": "time_series"}],
+        "datasource": "Prometheus"
+      },
+      {
+        "type": "graph",
+        "title": "Country Cases",
+        "targets": [{"expr": "covid_country_stats", "format": "time_series"}],
+        "datasource": "Prometheus"
+      }
+    ],
+    "schemaVersion": 16,
+    "version": 1
+  }
+}

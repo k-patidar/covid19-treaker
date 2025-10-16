@@ -1,0 +1,14 @@
+body { font-family: Arial, sans-serif; background: #f4f6f8; margin: 0; }
+.container { max-width: 500px; margin: 40px auto; background: #fff; padding: 2em; border-radius: 8px; box-shadow: 0 2px 8px #ccc; }
+h1 { text-align: center; color: #333; }
+form { margin-bottom: 2em; }
+select { width: 100%; padding: 0.5em; border-radius: 4px; border: 1px solid #ccc; }
+.stats { text-align: center; }
+.flag { width: 64px; height: 40px; border-radius: 4px; margin-bottom: 1em; }
+ul { list-style: none; padding: 0; }
+li { margin: 0.5em 0; font-size: 1.1em; }
+.error { color: #c00; text-align: center; margin-top: 1em; }
+@media (max-width: 600px) {
+  .container { padding: 1em; }
+  .flag { width: 48px; height: 30px; }
+}

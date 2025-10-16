@@ -1,0 +1,3 @@
+{
+  "python.defaultInterpreterPath": "${workspaceFolder}/covid-tracker/backend/.venv/Scripts/python.exe"
+}
