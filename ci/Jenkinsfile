@@ -15,6 +15,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
+                // Make sure Dockerfile is in repo root
                 sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
             }
         }
@@ -31,6 +32,15 @@ pipeline {
             }
         }
     }
+    post {
+        success {
+            echo " Local Docker build & run successful. Access at http://localhost:${PORT}"
+        }
+        failure {
+            echo " Build failed. Check Dockerfile, repo structure, and local Docker daemon."
+        }
+    }
 }
+
 
 
