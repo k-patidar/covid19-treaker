@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', 
+                git branch: 'master', 
                     url: 'https://github.com/k-patidar/covid19-treaker.git',
                     credentialsId: 'github-token'
             }
